@@ -1,0 +1,5 @@
+resolver: lts-3.22
+packages:
+  - '.'
+extra-deps:
+  - show-0.6
