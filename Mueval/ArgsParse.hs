@@ -1,6 +1,9 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 module Mueval.ArgsParse (Options(..), interpreterOpts) where
 
 import Control.Monad (liftM)
+import GHC.Generics
 import System.Console.GetOpt
 
 import Mueval.Context (defaultModules, defaultPackages)
@@ -21,7 +24,7 @@ data Options = Options
    , packageTrust :: Bool
    , trustedPackages :: [String]
    , help :: Bool
- } deriving Show
+ } deriving (Eq, Show, Generic)
 
 defaultOptions :: Options
 defaultOptions = Options { expression = ""
