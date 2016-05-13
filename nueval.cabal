@@ -1,0 +1,74 @@
+name:                nueval
+version:             0.10.0.0
+synopsis:            Safely evaluate pure Haskell expressions
+description:         
+  nueval is a Haskell interpreter. It uses the GHC API to evaluate arbitrary
+  Haskell expressions.  Importantly, nueval takes many precautions to defang and
+  avoid \"evil\" code.  It uses resource limits, whitelisted modules and Safe
+  Haskell, special Show instances for IO, threads, processes, and changes of
+  directory to sandbox the Haskell code.
+  .
+  It is, in short, intended to be a standalone version of Lambdabot's famous
+  evaluation functionality. For examples and explanations, please see the README
+  file.
+  .
+  nueval is POSIX-only.
+license:             BSD3
+license-file:        LICENSE
+author:              Gwern <gwern@gwern.net>
+maintainer:          Peter Harpending <peter@harpending.org>
+homepage:            https://github.com/pharpend/nueval
+bug-reports:         https://github.com/pharpend/nueval/issues
+category:            Development, Language
+cabal-version:       >=1.10
+build-type:          Simple
+data-files:          README.md, HCAR.tex
+extra-source-files:  build.sh, tests.sh
+
+source-repository head
+  type:                     git
+  location:                 https://github.com/pharpend/nueval.git
+
+library
+  default-language:         Haskell2010
+  ghc-options:              -Wall -static
+  hs-source-dirs:           lib
+  exposed-modules: 
+    Nueval
+    Nueval.ArgsParse
+    Nueval.Context
+    Nueval.Interpreter
+    Nueval.Parallel
+    Nueval.Resources
+  build-depends:
+      base ==4.8.*
+    , containers
+    , directory
+    , mtl>2
+    , filepath
+    , unix
+    , process
+    , hint>=0.3.1
+    , show>=0.3
+    , Cabal
+    , extensible-exceptions
+    , simple-reflect
+    , QuickCheck
+
+executable nueval-core
+  default-language:         Haskell2010
+  hs-source-dirs:           bin
+  ghc-options:              -Wall -threaded
+  main-is:                  nueval-core.hs
+  build-depends: 
+      base
+    , nueval
+
+executable nueval
+  default-language:         Haskell2010
+  hs-source-dirs:           bin
+  ghc-options:              -Wall -threaded
+  main-is:                  nueval.hs
+  build-depends: 
+      base
+    , nueval
