@@ -22,8 +22,10 @@ bug-reports:         https://github.com/pharpend/nueval/issues
 category:            Development, Language
 cabal-version:       >=1.10
 build-type:          Simple
-data-files:          README.md, HCAR.tex
-extra-source-files:  build.sh, tests.sh
+extra-source-files:
+  LICENSE
+  README.md
+  stack.yaml
 
 source-repository head
   type:                     git
@@ -42,18 +44,18 @@ library
     Nueval.Resources
   build-depends:
       base ==4.8.*
+    , Cabal
+    , QuickCheck
     , containers
     , directory
-    , mtl>2
-    , filepath
-    , unix
-    , process
-    , hint>=0.3.1
-    , show>=0.3
-    , Cabal
     , extensible-exceptions
+    , filepath
+    , hint >=0.3.1
+    , mtl >2
+    , process
+    , show >=0.3
     , simple-reflect
-    , QuickCheck
+    , unix
 
 executable nueval-core
   default-language:         Haskell2010
